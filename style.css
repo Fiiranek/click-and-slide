@@ -1,0 +1,89 @@
+body{
+    font-family: monospace;
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+.slider{
+    height: 100px;
+    width: 100px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+#slider1{
+    width: 0px;
+    background-size: 100px;
+    background-image: url(./img/1.jpg);
+}
+
+
+.slider-img{
+    width: 0px;
+    float: left;
+    height: 100px;
+    background-size: 100px;
+}
+
+button:focus{
+    outline: none;
+}
+
+#leadingImg{
+    margin-bottom: 10px;
+}
+
+.mode-btn{
+    margin: 0 5px;
+    background: white;
+    border: none;
+    font-size: 15px;
+    transition: .4s;
+}
+
+.mode-btn:hover{
+    background: #ddd;
+    cursor: pointer;
+    transition: .4s;
+}
+
+#topContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#leadingImg{
+    width: 100px;
+    height: 100px;
+}
+
+/* ----- MAIN PANEL ----- */
+
+#mainPanel{
+    width: 600px;
+    height: 600px;
+    border: 2px solid orange;
+}
+
+.puzzle{
+    float: left;
+    margin: 0;
+    background-repeat: no-repeat;
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+.empty-puzzle{
+    z-index: -100;
+}
