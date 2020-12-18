@@ -250,7 +250,6 @@ function winGame(size) {
     changeTimer(diff)
 
     winTime = winTime.getTime() - startTime.getTime()
-    console.log(msToTime(winTime))
     clearInterval(gameInterval)
 
     setTimeout(function () {
@@ -437,7 +436,6 @@ function getCookies(size) {
 
 function checkIfTop10(size, score) {
     let cookies = getCookies(size)
-    console.log(cookies)
     if (cookies.length == 0) {
         let username = prompt("Jestes w TOP 10! Podaj swój nick")
         username = encodeURI(username)
