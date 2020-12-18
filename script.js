@@ -81,7 +81,7 @@ document.getElementById("next").onclick = function () {
 const timerDigits = [hour1, hour2, min1, min2, sec1, sec2, ms1, ms2, ms3];
 function resetTimer() {
     for (let i = 0; i < timerDigits.length; i++) {
-        if (i != 1 && i != 3 && i != 5) timerDigits[i].src = "./digits/c0.gif"
+        timerDigits[i].src = "./digits/c0.gif"
     }
 }
 
@@ -262,7 +262,7 @@ function winGame(size) {
 
 }
 
-let canSlide = true;
+
 
 function movePuzzle(specialPuzzle, direction, size, top, left) {
     let distance = mainPanelSize / size
@@ -279,11 +279,12 @@ function movePuzzle(specialPuzzle, direction, size, top, left) {
         specialPuzzle.style.left = `${left - distance}px`
     }
 }
-
+let canMove = true;
 function slidePuzzle(specialPuzzle, direction, size, top, left) {
+    canMove = false;
     let tick = 50
     let distance = (mainPanelSize / size)/tick
-    
+    canMove
     for (let i = 0; i < tick; i++) {
         setTimeout(function () {
             if (direction == "down") {
@@ -298,6 +299,7 @@ function slidePuzzle(specialPuzzle, direction, size, top, left) {
             if (direction == "left") {
                 specialPuzzle.style.left = `${left - distance*(i+1)}px`
             }
+            if(i == tick - 1) canMove = true
         }, (i + 1) * (500 / tick))
     }
 }
@@ -327,7 +329,8 @@ function createPuzzle(size, i, j, imgPath) {
         if (puzzleI < size - 1) {
             if (puzzles[puzzleI + 1][puzzleJ] == 100) {
                 if(!shuffled) movePuzzle(this, "down", size, top, left)
-                if(shuffled) slidePuzzle(this, "down", size, top, left)
+                if(shuffled && !canMove) return false
+                if(shuffled && canMove) slidePuzzle(this, "down", size, top, left)
                 puzzles[puzzleI][puzzleJ] = 100
                 puzzles[puzzleI + 1][puzzleJ] = id
                 puzzleI = puzzleI + 1
@@ -341,7 +344,8 @@ function createPuzzle(size, i, j, imgPath) {
         if (puzzleI > 0) {
             if (puzzles[puzzleI - 1][puzzleJ] == 100) {
                 if(!shuffled) movePuzzle(this, "up", size, top, left)
-                if(shuffled) slidePuzzle(this, "up", size, top, left)
+                if(shuffled && !canMove) return false
+                if(shuffled && canMove) slidePuzzle(this, "up", size, top, left)
                 puzzles[puzzleI][puzzleJ] = 100
                 puzzles[puzzleI - 1][puzzleJ] = id
                 puzzleI = puzzleI - 1
@@ -355,7 +359,8 @@ function createPuzzle(size, i, j, imgPath) {
         if (puzzleJ < size - 1) {
             if (puzzles[puzzleI][puzzleJ + 1] == 100) {
                 if(!shuffled) movePuzzle(this, "right", size, top, left)
-                if(shuffled) slidePuzzle(this, "right", size, top, left)
+                if(shuffled && !canMove) return false
+                if(shuffled && canMove) slidePuzzle(this, "right", size, top, left)
                 puzzles[puzzleI][puzzleJ] = 100
                 puzzles[puzzleI][puzzleJ + 1] = id
                 puzzleJ = puzzleJ + 1
@@ -369,7 +374,8 @@ function createPuzzle(size, i, j, imgPath) {
         if (puzzleJ > 0) {
             if (puzzles[puzzleI][puzzleJ - 1] == 100) {
                 if(!shuffled) movePuzzle(this, "left", size, top, left)
-                if(shuffled) slidePuzzle(this, "left", size, top, left)
+                if(shuffled && !canMove) return false
+                if(shuffled && canMove) slidePuzzle(this, "left", size, top, left)
                 puzzles[puzzleI][puzzleJ] = 100
                 puzzles[puzzleI][puzzleJ - 1] = id
                 puzzleJ = puzzleJ - 1
